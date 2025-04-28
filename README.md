@@ -1,0 +1,4 @@
+- 👋 Hi, I’m @kaiserr82
+- 👀 I’m interested in OpenSource Programming
+- 📫 How to reach me rhodankaiser@gmail.com
+- ⚡ Fun fact: The meaning of life: 101010
