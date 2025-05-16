@@ -41,9 +41,27 @@ int main() {
     std::cout << "Starte Mausbewegungssimulator...\n";
 
     while (true) {
+        int currentT = 0;
+        int lastPercent = 0;
         int pause_sec = pause_dist(gen);
         std::cout << "Wartezeit: " << pause_sec << " Sekunden\n";
-        std::this_thread::sleep_for(std::chrono::seconds(pause_sec));
+
+        do
+        {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            currentT++;
+            int percent = (currentT * 100 / pause_sec);
+            
+            if (lastPercent != percent)
+            {
+                lastPercent = percent;
+                std::ostringstream ss;
+                ss << 100 - percent;
+                std::string s(ss.str());
+                std::cout << "\rNoch: " << s << "%" << std::flush;
+            }
+        } while (currentT < pause_sec);
+        std::cout << std::endl;
 
         int x = pos_dist(gen);
         int y = pos_dist(gen);
@@ -61,7 +79,7 @@ int main() {
 #endif
 
         std::ostringstream time_stream;
-        time_stream << std::put_time(&now_tm, "%Y-%m-%d %H:%M:%S");
+        time_stream << std::put_time(&now_tm, "%H:%M:%S");
         std::cout << "Maus bewegt nach (" << x << ", " << y << ") um " << time_stream.str() << "\n";
     }
 
